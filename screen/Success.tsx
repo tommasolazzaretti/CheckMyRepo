@@ -1,7 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-const SuccessScreen = () => {
+interface ISuccessParams {
+  navigation: any;
+}
+
+const SuccessScreen = ({navigation}: ISuccessParams) => {
   return (
     <View style={styles.container}>
       <View style={styles.labelContainer}>
@@ -9,7 +13,7 @@ const SuccessScreen = () => {
         <Text style={styles.successLabel}>Repository sent.</Text>
       </View>
       <View style={{justifyContent: 'flex-end'}}>
-        <Text style={styles.coolLabel}>COOL</Text>
+        <Text style={styles.coolLabel} onPress={() => navigation.navigate('Home')}>COOL</Text>
       </View>
     </View>
   );
