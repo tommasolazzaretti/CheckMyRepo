@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import globalStyles from '../Style';
 
 interface IHomeScreenParams {
   navigation: any;
@@ -43,12 +44,9 @@ const HomeScreen = ({navigation, route}: IHomeScreenParams) => {
   return (
     <View
       style={[
-        styles.container,
+        globalStyles.container,
         valueExist() && valueIsValid() ? styles.containerOk : null,
         valueExist() && !valueIsValid() ? styles.containerError : null,
-        {
-          flexDirection: 'column',
-        },
       ]}>
       <View style={{flex: 1}}>
         <Text style={styles.title}>Set the repository address</Text>
@@ -76,13 +74,13 @@ const HomeScreen = ({navigation, route}: IHomeScreenParams) => {
       <View style={{justifyContent: 'flex-end'}}>
         {(!username?.usernameValidity || !repository?.repositoryValidity) && (
           <Text
-            style={styles.checkLabel}
+            style={globalStyles.bottomLabel}
             onPress={() => navigation.navigate('CheckDataUser')}>
             CHECK
           </Text>
         )}
         {username?.usernameValidity && repository?.repositoryValidity && (
-          <Text style={styles.checkLabel} onPress={() => sendData()}>
+          <Text style={globalStyles.bottomLabel} onPress={() => sendData()}>
             SEND
           </Text>
         )}
@@ -92,20 +90,11 @@ const HomeScreen = ({navigation, route}: IHomeScreenParams) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   containerError: {
     backgroundColor: 'red',
   },
   containerOk: {
     backgroundColor: 'green',
-  },
-  checkLabel: {
-    alignSelf: 'flex-end',
-    fontWeight: 'bold',
-    fontSize: 18,
-    padding: 20,
   },
   title: {
     fontWeight: 'bold',
@@ -116,18 +105,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 28,
     padding: 10,
-  },
-  errorLabel: {
-    alignSelf: 'flex-end',
-    fontWeight: 'bold',
-    fontSize: 18,
-    padding: 20,
-  },
-  successLabel: {
-    alignSelf: 'flex-end',
-    fontWeight: 'bold',
-    fontSize: 18,
-    padding: 20,
   },
 });
 

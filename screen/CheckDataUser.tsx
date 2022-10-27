@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import GoBackButton from '../component/GoBackButton';
+import globalStyles from '../Style';
 
 interface ICheckDataRepositoryScreenParams {
   navigation: any;
@@ -32,49 +33,27 @@ const CheckDataUserScreen = ({
   };
 
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          flexDirection: 'column',
-        },
-      ]}>
+    <View style={globalStyles.container}>
       <View style={{justifyContent: 'flex-start'}}>
         <GoBackButton navigation={navigation} title={'USER'} />
       </View>
       <View style={{flex: 1}}>
         <TextInput
-          style={styles.input}
+          style={globalStyles.inputLayout}
           onChangeText={onChangeUser}
           placeholder={'Type your github username'}
           value={user}
         />
       </View>
       <View style={{justifyContent: 'flex-end'}}>
-        <Text style={styles.doneLabel} onPress={() => checkUserName(user)}>
+        <Text
+          style={globalStyles.bottomLabel}
+          onPress={() => checkUserName(user)}>
           DONE
         </Text>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-  doneLabel: {
-    alignSelf: 'flex-end',
-    fontWeight: 'bold',
-    fontSize: 18,
-    padding: 20,
-  },
-});
 
 export default CheckDataUserScreen;
