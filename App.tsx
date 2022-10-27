@@ -19,7 +19,20 @@ const App = () => {
         screenOptions={{
           headerShown: false,
         }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          initialParams={{
+            username: {
+              value: null,
+              usernameValidity: false,
+            },
+            repository: {
+              value: null,
+              repositoryValidity: false,
+            },
+          }}
+        />
         <Stack.Screen name="CheckDataUser" component={CheckDataUserScreen} />
         <Stack.Screen
           name="CheckDataRepository"

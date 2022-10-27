@@ -4,6 +4,7 @@ import GoBackButton from '../component/GoBackButton';
 
 interface ICheckDataRepositoryScreenParams {
   navigation: any;
+  route: any;
 }
 
 const regexRepoUrl = new RegExp(
@@ -12,15 +13,27 @@ const regexRepoUrl = new RegExp(
 
 const CheckDataRepositoryScreen = ({
   navigation,
+  route,
 }: ICheckDataRepositoryScreenParams) => {
   const [repo, onChangeRepo] = React.useState('');
+  const {username} = route.params;
 
   const checkRepoUrl = (repository: string) => {
-    console.log(' check : ', regexRepoUrl.test(repository));
     if (regexRepoUrl.test(repository)) {
-      navigation.navigate('Success');
+      navigation.navigate('Home', {
+        username,
+        repository: {
+          value: repository,
+          repositoryValidity: true,
+        },
+      });
     } else {
-      navigation.navigate('Home');
+      navigation.navigate('Home', {
+        repository: {
+          value: repository,
+          repositoryValidity: false,
+        },
+      });
     }
   };
 

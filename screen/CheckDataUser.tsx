@@ -15,9 +15,19 @@ const CheckDataUserScreen = ({
 
   const checkUserName = (username: string) => {
     if (regexUsername.test(username)) {
-      navigation.navigate('CheckDataRepository');
+      navigation.navigate('CheckDataRepository', {
+        username: {
+          value: user,
+          usernameValidity: true,
+        },
+      });
     } else {
-      navigation.navigate('Home');
+      navigation.navigate('Home', {
+        username: {
+          value: user,
+          usernameValidity: false,
+        },
+      });
     }
   };
 
