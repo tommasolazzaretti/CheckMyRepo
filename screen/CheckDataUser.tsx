@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {Text, TextInput, View} from 'react-native';
 import GoBackButton from '../component/GoBackButton';
 import globalStyles from '../Style';
 
