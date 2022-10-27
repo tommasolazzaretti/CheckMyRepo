@@ -9,8 +9,15 @@ interface IHomeScreenParams {
 const url = 'https://pushmore.io/webhook/zGsgGuqzBEnVZ41CqjzPDLGQ';
 
 const HomeScreen = ({navigation, route}: IHomeScreenParams) => {
-  console.log(' home route ', route);
   const {username, repository} = route.params;
+
+  const valueExist = () => {
+    return username.value || repository.value;
+  };
+
+  const valueIsValid = () => {
+    return username?.usernameValidity && repository?.repositoryValidity;
+  };
 
   const sendData = () => {
     fetch(url, {
@@ -37,6 +44,8 @@ const HomeScreen = ({navigation, route}: IHomeScreenParams) => {
     <View
       style={[
         styles.container,
+        valueExist() && valueIsValid() ? styles.containerOk : null,
+        valueExist() && !valueIsValid() ? styles.containerError : null,
         {
           flexDirection: 'column',
         },
@@ -44,9 +53,26 @@ const HomeScreen = ({navigation, route}: IHomeScreenParams) => {
       <View style={{flex: 1}}>
         <Text style={styles.title}>Set the repository address</Text>
         <Text style={styles.infoLabel}>github.com</Text>
-        <Text style={styles.infoLabel}>/user</Text>
-        <Text style={styles.infoLabel}>/repo</Text>
+        <Text style={styles.infoLabel}>
+          /
+          {username?.value ? <Text>{username?.value}</Text> : <Text>user</Text>}
+        </Text>
+        <Text style={styles.infoLabel}>
+          /
+          {repository?.value ? (
+            <Text>{repository?.value}</Text>
+          ) : (
+            <Text>repo</Text>
+          )}
+        </Text>
       </View>
+      {valueExist() && !valueIsValid() && (
+        <View style={{flex: 1}}>
+          <Text style={styles.infoLabel}>
+            Check your username or your repository name
+          </Text>
+        </View>
+      )}
       <View style={{justifyContent: 'flex-end'}}>
         {(!username?.usernameValidity || !repository?.repositoryValidity) && (
           <Text
@@ -68,6 +94,12 @@ const HomeScreen = ({navigation, route}: IHomeScreenParams) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  containerError: {
+    backgroundColor: 'red',
+  },
+  containerOk: {
+    backgroundColor: 'green',
   },
   checkLabel: {
     alignSelf: 'flex-end',
