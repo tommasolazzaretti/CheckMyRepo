@@ -7,7 +7,7 @@ interface IHomeScreenParams {
   route: any;
 }
 
-const url = 'https://pushmore.io/webhook/zGsgGuqzBEnVZ41CqjzPDLGQ';
+const url = 'https://pushmore.io/webhook/d3Gm4aEPCuhAUjfbECLLdW41';
 
 const HomeScreen = ({navigation, route}: IHomeScreenParams) => {
   const {username, repository} = route.params;
